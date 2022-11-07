@@ -4,8 +4,76 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a20e87f793d84786fa9d5ecfc4ed52d7",
+    "content-hash": "d665c4892df3032ba16ccd009acf3d44",
     "packages": [
+        {
+            "name": "acamposm/ping",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angelcamposm/ping.git",
+                "reference": "5cd871f08a3cad8c36959c36172a48ae066aee8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angelcamposm/ping/zipball/5cd871f08a3cad8c36959c36172a48ae066aee8a",
+                "reference": "5cd871f08a3cad8c36959c36172a48ae066aee8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.23",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Acamposm\\Ping\\ServiceProviders\\PingServiceProvider"
+                    ],
+                    "aliases": {
+                        "Ping": "Acamposm\\Ping\\Facades\\PingFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Acamposm\\Ping\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Angel Campos",
+                    "email": "angel.campos.m@outlook.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Ping uses the ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an ICMP ECHO_RESPONSE from a host or gateway.",
+            "homepage": "https://github.com/angelcamposm/ping",
+            "keywords": [
+                "icmp",
+                "laravel",
+                "php",
+                "ping"
+            ],
+            "support": {
+                "issues": "https://github.com/angelcamposm/ping/issues",
+                "source": "https://github.com/angelcamposm/ping/tree/2.1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://www.blockchain.com/btc/address/3DWxSQg2HNijAADowkQWFJsDHHpKo8Ec2z",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-12-04T22:38:08+00:00"
+        },
         {
             "name": "akaunting/laravel-setting",
             "version": "1.2.8",
@@ -136,6 +204,52 @@
                 "source": "https://github.com/anhskohbo/no-captcha/tree/3.4.0"
             },
             "time": "2022-02-10T02:50:24+00:00"
+        },
+        {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/balping/json-raw-encoder.git",
+                "reference": "e2b0ab888342b0716f1f0628e2fa13b345c5f276"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/balping%2Fjson-raw-encoder/repository/archive.zip?sha=e2b0ab888342b0716f1f0628e2fa13b345c5f276",
+                "reference": "e2b0ab888342b0716f1f0628e2fa13b345c5f276",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/api/v4/projects/6731265/issues"
+            },
+            "time": "2020-06-06T16:24:31+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1202,6 +1316,62 @@
                 }
             ],
             "time": "2022-02-25T21:32:43+00:00"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "6.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "6914e85086749ac90832b0b14479642fe0337cf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/6914e85086749ac90832b0b14479642fe0337cf4",
+                "reference": "6914e85086749ac90832b0b14479642fe0337cf4",
+                "shasum": ""
+            },
+            "require": {
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "support": {
+                "issues": "https://github.com/ConsoleTVs/Charts/issues",
+                "source": "https://github.com/ConsoleTVs/Charts/tree/6.5.6"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/ErikCampobadal",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-08-08T11:01:59+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

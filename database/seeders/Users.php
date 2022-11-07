@@ -17,6 +17,7 @@ class Users extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@admin.com',
+            'user_code' => 'admin',
             'email_verified_at' => '2022-10-25 15:12:34.000',
             'password' => '$2y$10$I2OLqYyvPfeAdbUBcnLhGOUIqcOAtyHAb9Cg6AEvYCSFTakzWkO1u',
             'status' => 'ACTIVE',
