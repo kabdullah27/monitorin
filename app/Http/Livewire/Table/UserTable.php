@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Livewire\Table;
+
+use Laravolt\Epicentrum\Filters\EmailFilter;
+use Laravolt\Epicentrum\Filters\RegisteredFilter;
+use Laravolt\Epicentrum\Filters\RoleFilter;
+use Laravolt\Epicentrum\Filters\StatusFilter;
+use Laravolt\Suitable\Columns\Avatar;
+use Laravolt\Suitable\Columns\Date;
+use Laravolt\Suitable\Columns\Label;
+use Laravolt\Suitable\Columns\Numbering;
+use Laravolt\Suitable\Columns\Raw;
+use Laravolt\Suitable\Columns\RestfulButton;
+use Laravolt\Suitable\Columns\Text;
+use Laravolt\Ui\TableView;
+
+class UserTable extends TableView
+{
+    public function data()
+    {
+        $searchabledColumns = config('laravolt.epicentrum.repository.searchable', []);
+        $query = app(config('laravolt.epicentrum.models.user'))
+            ->with('roles')
+            ->autoSort($this->sortPayload())
+            ->autoFilter()
+            ->whereLike($searchabledColumns, trim($this->search))
+            ->latest();
+
+        return $query;
+    }
+
+    public function columns(): array
+    {
+        return [
+            Numbering::make('No'),
+            Avatar::make('name', ''),
+            Text::make('name', trans('laravolt::users.name'))->sortable(),
+            Text::make('email', trans('laravolt::users.email'))->sortable(),
+            Raw::make(
+                function ($data) {
+                    return $data->roles->implode('name', ', ');
+                },
+                trans('laravolt::users.roles')
+            ),
+            Label::make('status', trans('laravolt::users.status'))->addClass('mini'),
+            Date::make('created_at', trans('laravolt::users.registered_at'))->sortable(),
+            RestfulButton::make('users', trans('users.action'))->only('edit', 'delete'),
+        ];
+    }
+
+    public function filters(): array
+    {
+        return [
+            new EmailFilter(),
+            new RoleFilter(),
+            new StatusFilter(),
+            new RegisteredFilter(),
+        ];
+    }
+}
