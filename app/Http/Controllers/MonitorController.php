@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
+use App\Models\MtWebsite;
 
 
 class MonitorController extends Controller
@@ -12,6 +13,8 @@ class MonitorController extends Controller
     {
         $title = 'Monitor';
 
-        return view('monitor.index', compact('title'));
+        $websites = MtWebsite::where('is_active', true)->get();
+
+        return view('monitor.index', compact('title', 'websites'));
     }
 }

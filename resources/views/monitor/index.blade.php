@@ -1,110 +1,66 @@
 <x-volt-app :title="__('List Ping')">
 
     <br/>
-    <canvas id="myChart" width="400" height="100"></canvas>
-    <br/>
-    <canvas id="myChart1" width="400" height="100"></canvas>
+    @foreach($websites as $key => $website)
+      <canvas id="myChart{{$key}}" width="400" height="100"></canvas>
+      <br/>
+    @endforeach
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
     // create initial empty chart
-    let labelID = 1;
-    let labelID1 = 1;
-    var ctx_live = document.getElementById("myChart");
-    var ctx_live1 = document.getElementById("myChart1");
-    var myChart = new Chart(ctx_live, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [{
-          data: [],
-          borderWidth: 1,
-          borderColor:'#00c0ef',
-          label: 'Kaskus',
-        }]
-      },
-      options: {
-        responsive: true,
-        legend: {
-          display: false
+    @foreach($websites as $key => $website)
+      let labelID{{$key}} = 1;
+      var ctx{{$key}} = document.getElementById("myChart"+{{$key}});
+      var chart{{$key}} = new Chart(ctx{{$key}}, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [{
+            data: [],
+            borderWidth: 1,
+            borderColor:'#00c0ef',
+            label: "{{$website->website_name}}",
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
+        options: {
+          responsive: true,
+          legend: {
+            display: false
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            }
           }
         }
-      }
-    });
+      });
+    @endforeach
 
-    var myChart1 = new Chart(ctx_live1, {
-      type: 'bar',
-      data: {
-        labels: [],
-        datasets: [{
-          data: [],
-          borderWidth: 1,
-          borderColor:'#00c0ef',
-          label: 'Google',
-        }]
-      },
-      options: {
-        responsive: true,
-        legend: {
-          display: false
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-          }
-        }
-      }
-    });
-
-    var updateChart = function() {
+    function get_ping() {
+      @foreach($websites as $key => $website)
         $.ajax({
           url: "{{ route('api.chart') }}",
           type: 'GET',
           dataType: 'json',
-          data: {link: 'https://kaskus.com/'},
+          data: {link: "{{$website->website_domain_name}}"},
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           success: function(data) {
-
-            myChart.data.labels.push(labelID++);
-            myChart.data.datasets[0].data.push(data.data);
-            myChart.update();
+            chart{{$key}}.data.labels.push(labelID{{$key}}++);
+            chart{{$key}}.data.datasets[0].data.push(data.data);
+            chart{{$key}}.update();
           },
           error: function(data){
             console.log(data);
           }
         });
-    }
-
-    var updateChart1 = function() {
-        $.ajax({
-          url: "{{ route('api.chart') }}",
-          type: 'GET',
-          dataType: 'json',
-          data: {link: 'https://www.google.com/'},
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function(data) {
-
-            myChart1.data.labels.push(labelID++);
-            myChart1.data.datasets[0].data.push(data.data);
-            myChart1.update();
-          },
-          error: function(data){
-            console.log(data);
-          }
-        });
+      @endforeach
     }
 
     setInterval(() => {
-        updateChart();
-        updateChart1();
-      }, 1500);
+      get_ping()
+    }, 2000);
     </script>
 
 </x-volt-app>

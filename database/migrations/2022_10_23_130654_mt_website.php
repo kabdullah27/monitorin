@@ -23,6 +23,11 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by');
             $table->softDeletes();
         });
+
+        Schema::table('mt_websites', function ($table) {
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
+        });
     }
 
     /**

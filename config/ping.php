@@ -34,7 +34,7 @@ return [
      | Only super-user may set interval to values less than 0.2 seconds.
      |
      */
-    'interval' => 1,
+    'interval' => 0.5,
 
     /*
      |-------------------------------------------------------------------------
